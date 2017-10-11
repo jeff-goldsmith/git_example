@@ -45,6 +45,41 @@ airbnb_data %>%
 
 ### Does rating vary by neighborhood, room type, or both?
 
+First I'll create a table to look at rating by boro.
+
+```{r}
+airbnb_data %>%
+  group_by(boro) %>% 
+  filter(!is.na(rating)) %>%
+  summarize(median_rating = median(rating),
+            mean_rating = mean(rating),
+            sd_rating = sd(rating))
+```
+
+Next I'll try some visual displays.
+
+```{r}
+airbnb_data %>%
+  ggplot(aes(x = boro, y = rating)) + 
+  geom_violin(bw = .1)
+
+airbnb_data %>%
+  ggplot(aes(x = room_type, y = rating)) + 
+  geom_violin(bw = .1)
+```
+
+Finally, I'm interested in the `room_type` variable. Rating didn't seem to vary much across this variable, but I'd still like to examine this and boro at the same time. 
+
+The chunk below creates a table, and then uses `knitr::kable()` to format the output.
+
+```{r}
+airbnb_data %>%
+  group_by(boro, room_type) %>% 
+  filter(!is.na(rating)) %>%
+  summarize(mean_rating = mean(rating)) %>%
+  spread(key = boro, value = mean_rating) %>%
+  knitr::kable()
+```
 
 ### Do hosts with more listings have higher or lower ratings?
 
