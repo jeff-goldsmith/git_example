@@ -158,4 +158,4 @@ Of these, the question dealing with descriptions is one we're not in a position 
 
 ## Discussion
 
-Need a discussion.
+We learned some stuff about the airbnb dataset and it's pretty cool! Most hosts have only 1 or 2 listings. A few have many more!
