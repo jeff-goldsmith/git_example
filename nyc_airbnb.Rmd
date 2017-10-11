@@ -31,7 +31,14 @@ airbnb_data = read_csv("./data/nyc_airbnb.zip") %>%
 Next I'll do a bit of inspection to make sure I understand the data structure.
 
 ```{r}
+# View(airbnb_data)
+str(airbnb_data)
 
+airbnb_data %>%
+  count(boro)
+
+airbnb_data %>%
+  count(room_type)
 ```
 
 ## Brainstorming questions
