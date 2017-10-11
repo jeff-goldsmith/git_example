@@ -19,7 +19,11 @@ knitr::opts_chunk$set(
 I'll load the tidyverse and the dataset. I'm also doing a bit of editing and renaming to make my life easier. 
 
 ```{r}
+library(tidyverse)
 
+airbnb_data = read_csv("./data/nyc_airbnb.zip") %>%
+  mutate(rating = review_scores_location / 2) %>%
+  rename(boro = neighbourhood_group)
 ```
 
 ## Understanding variables
