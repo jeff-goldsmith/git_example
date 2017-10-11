@@ -158,4 +158,4 @@ Of these, the question dealing with descriptions is one we're not in a position 
 
 ## Discussion
 
-Need a discussion.
+The NYC airbnb data are really neat and we've just scratched the surface!! 
