@@ -86,6 +86,28 @@ airbnb_data %>%
 
 ### Where are rentals located?
 
+I'm going to use [latitude](https://en.wikipedia.org/wiki/Latitude) and [longitude](https://en.wikipedia.org/wiki/Longitude) to plot the location of rentals. I always get lat and mixed up, and it seems like the person who put these data together did as well ...
+
+```{r}
+airbnb_data %>%
+  ggplot(aes(x = longitude, y = latitude)) +
+  geom_point()
+```
+
+Next I'll try to clean this up a bit and use other aesthetic mappings. For simplicity, I'll also focus on Manhattan.
+
+```{r, fig.asp = 1}
+airbnb_data %>%
+  filter(boro == "Manhattan") %>% 
+  ggplot(aes(x = longitude, y = latitude, color = rating)) +
+  geom_point(alpha = .1) + 
+  scale_colour_gradient(low = "red", high = "green",
+  space = "Lab", na.value = "grey50", guide = "colourbar") +
+  coord_cartesian() + 
+  theme_classic()
+```
+
+We can learn quite a bit from this -- there are fewer rentals in some neighborhoods of Manhattan than others, and there seems to be a slight decrease in rating for rentals farther north than downtown. 
 
 ### Other questions
 
