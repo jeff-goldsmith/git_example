@@ -82,6 +82,41 @@ airbnb_data %>%
 ```
 
 ### Do hosts with more listings have higher or lower ratings?
+First I'll look at the number of properties by each host. This code gave me some trouble in class -- the first try and the better approach are both shown below. 
+
+```{r}
+airbnb_data %>% 
+  count(calculated_host_listings_count)
+
+airbnb_data %>%
+  count(host_id) %>%
+  count(n)
+```
+
+We'll use `calculated_host_listings_count` moving forward for this question -- that gives the total number of rentals that are hosted by the host in the row. 
+
+I'll try to answer this using a scatterplot
+
+```{r}
+airbnb_data %>% 
+  ggplot(aes(x = calculated_host_listings_count, y = rating)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+I'll also try to answer this using a numeric summary for a binary `lots_of_houses` variable.
+
+```{r}
+airbnb_data %>%
+  filter(!is.na(rating)) %>%
+  mutate(lots_of_houses = (calculated_host_listings_count > 1)) %>% 
+  group_by(lots_of_houses) %>% 
+  summarize(median_rating = median(rating),
+            mean_rating = mean(rating),
+            sd_rating = sd(rating))
+```
+
+If anything, hosts with lots of apartments have slightly lower ratings. 
 
 
 ### Where are rentals located?
